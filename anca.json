@@ -1,0 +1,53 @@
+{
+  "authors": [
+    {
+      "name": "Timur Moziev",
+      "github": "TimurRin",
+      "email": "timur.moziev@gmail.com",
+      "type": "maintainer",
+      "url": "https://timurrin.github.io/"
+    }
+  ],
+  "cinnabarMeta": {
+    "dataVersion": 0,
+    "version": {
+      "latest": "0.0.0",
+      "latestNext": "0.0.0+next.20240809_130724",
+      "timestamp": 1723208844
+    },
+    "files": [
+      {
+        "path": "./package.json",
+        "type": "nodejs-package-json"
+      },
+      {
+        "path": "./package-lock.json",
+        "type": "nodejs-package-lock-json"
+      },
+      {
+        "path": "./src/cinnabar.ts",
+        "type": "typescript",
+        "updateBuild": true
+      }
+    ],
+    "repo": {
+      "type": "github",
+      "value": "cinnabar-forge/bistro-shara"
+    },
+    "updateChangelog": true
+  },
+  "deployment": {
+    "preparation": [
+      "npm ci",
+      "npm run build"
+    ],
+    "start": [
+      "node ./dist/index.js"
+    ]
+  },
+  "development": {
+    "readme": {}
+  },
+  "stack": "nodejs",
+  "type": "app"
+}

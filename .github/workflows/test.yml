@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  test-commit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18.20.4, 20.16.0, 22.5.1]
+    name: Test repo on Node.js ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v4
+        name: "Checkout repo"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://registry.npmjs.org/
+        name: "Install Node.js"
+      - run: npm ci
+        name: "Install dependencies"
+      - run: npm test
+        name: "Run tests"

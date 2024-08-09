@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bistro Shara</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/marked.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="appHeader"></h1>
+    <div>
+      <code>Bistro Shara<span id="appVersion"></span></code>
+    </div>
+
+    <div id="loginForm">
+      <h2>Enter your username</h2>
+      <div><input type="text" id="username" required /></div>
+      <div>
+        <input
+          type="password"
+          id="accessToken"
+          placeholder="Access Token (if required)"
+        />
+      </div>
+      <div><button id="loginButton">Join</button></div>
+    </div>
+
+    <div id="app" style="display: none">
+      <div class="container">
+        <div class="content-list">
+          <div class="card">
+            <span class="card-header">new note</span>
+            <div class="card-content">
+              <form id="noteForm">
+                <div class="padded">
+                  <textarea
+                    id="noteContent"
+                    rows="4"
+                    cols="30"
+                    required
+                    placeholder="Enter your note in Markdown format"
+                    style="width: 100%"
+                  ></textarea>
+                </div>
+                <div class="padded">
+                  <button type="submit">Add Note</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card">
+            <span class="card-header">new file</span>
+            <div class="card-content">
+              <form id="fileForm">
+                <div class="padded">
+                  <input type="file" id="fileInput" required />
+                </div>
+                <div class="padded">
+                  <button type="submit">Upload File</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="content-list reversed-list" id="contentList"></div>
+      </div>
+
+      <div>
+        <h2>Online Users</h2>
+        <ul id="userList"></ul>
+      </div>
+
+      <div>
+        <h2>Activity Log (last day)</h2>
+        <ul id="activityLog" class="reversed-list"></ul>
+      </div>
+    </div>
+
+    <script src="client.js"></script>
+  </body>
+</html>

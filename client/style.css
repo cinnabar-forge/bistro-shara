@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section {
+  width: 48%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+button {
+  margin-left: 10px;
+  background-color: #cecece;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#loginForm {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#loginForm div,
+.padded {
+  padding: 3px;
+}
+
+#app {
+  display: none;
+}
+
+.content-list {
+  width: 100%;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.card-type {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.card-header {
+  justify-content: center;
+  display: flex;
+  font-weight: bold;
+  font-variant-caps: petite-caps;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 5px;
+}
+
+.card-info div {
+  padding: 7px;
+}
+
+.card-content {
+  margin-bottom: 5px;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.reversed-list {
+  display: flex;
+  flex-direction: column-reverse;
+}

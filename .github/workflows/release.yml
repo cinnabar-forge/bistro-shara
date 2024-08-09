@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    env:
+      ANCA_CI: true
+    name: "Publish package to npm registry"
+    steps:
+      - uses: actions/checkout@v4
+        name: "Checkout repo"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.5.1
+          registry-url: https://registry.npmjs.org/
+        name: "Install Node.js"
+      - run: npm ci
+        name: "Install dependencies"
+      - run: npm test
+        name: "Run tests"
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        name: "Build distribution bundle and publish to registry"
+  build-executables:
+    permissions: write-all
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    env:
+      ANCA_CI: true
+    name: Build executables on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout repo
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.5.1
+        name: Install Node.js
+      - run: npm ci
+        name: Install dependencies
+      - run: npm run build:sea
+        name: Build executables
+      - run: |
+          EXT=""
+          if [ "${{ matrix.os }}" == "windows-latest" ]; then
+            EXT=".exe"
+          fi
+          mv build/sea/app${EXT} build/sea/${{ github.event.repository.name }}-${{ github.ref_name }}-${{ runner.arch }}${EXT}
+        shell: bash
+        name: Rename executable
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/sea/${{ github.event.repository.name }}-${{ github.ref_name }}-${{ runner.arch }}${{ matrix.os == 'windows-latest' && '.exe' || '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: Attach executables to release
